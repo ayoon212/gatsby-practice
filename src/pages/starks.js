@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "../components/layout";
 
 export default (props =>
-  <div>
+  <Layout>
     <h1>Starks</h1>
     <ul>
       <ol>Eddard</ol>
@@ -12,5 +13,5 @@ export default (props =>
       <ol>Bran</ol>
       <ol>Rickon</ol>
     </ul>
-  </div>
+  </Layout>
 );
