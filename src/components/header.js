@@ -1,9 +1,28 @@
 import React from "react";
-import { Link } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
+import { css } from "@emotion/core";
+import { rhythm } from "../utils/typography";
 
-export default () => (
-  <header>
-    <Link to="/" style={{ marginRight: '0.5rem' }}><span role="img" aria-label="home">🏠</span></Link>
-    <div style={{ display: 'inline-block', fontSize: '1.75rem' }}>A Gatsby Project of <span role="img" aria-label="ice">❄</span> and <span role="img" aria-label="fire">🔥</span></div>
-  </header>
-);
+function getTitleMarkup(data) {
+  return {__html: data.site.siteMetadata.title};
+}
+
+export default () => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
+  return (<header>
+    <Link to="/" css={css`
+      margin-right: ${rhythm(0.5)};
+    `}><span role="img" aria-label="home">🏠</span></Link>
+    <h1 css={css`
+      display: inline-block
+    `} dangerouslySetInnerHTML={getTitleMarkup(data)}></h1>
+  </header>);
+};
