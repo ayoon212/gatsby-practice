@@ -9,12 +9,20 @@ module.exports = {
     title: `A Gatsby Project of <span role="img" aria-label="ice">❄</span> and <span role="img" aria-label="fire">🔥</span>`
   },
   plugins: [
-    "gatsby-plugin-emotion",
     {
-      resolve: "gatsby-plugin-typography",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        pathToConfigModule: "src/utils/typography"
+        name: `src`,
+        path: `${__dirname}/src/`,
+      },
+    },
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-emotion`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`
       }
-    }
+    },
   ]
 }
