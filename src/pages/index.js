@@ -10,7 +10,9 @@ export default ({data}) => (
       <h4>{data.allMarkdownRemark.totalCount} pages</h4>
       {data.allMarkdownRemark.nodes.map(node => (
         <div key={node.id}>
-          <h3>{node.frontmatter.title}</h3>
+          <Link to={node.fields.slug}>
+            <h3>{node.frontmatter.title}</h3>
+          </Link>
           <p><i>{node.excerpt}</i></p>
         </div>
       ))}
@@ -20,13 +22,16 @@ export default ({data}) => (
 
 export const query = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: { fields: [frontmatter___title], order: ASC }) {
       totalCount
       nodes {
         id
         frontmatter {
           title
           words
+        }
+        fields {
+          slug
         }
         excerpt
       }
